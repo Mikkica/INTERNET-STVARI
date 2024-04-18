@@ -1,0 +1,3 @@
+obj\Debug\net7.0\Protos/Forecast.cs \
+obj\Debug\net7.0\Protos/ForecastGrpc.cs: C:/Users/mihaj/.nuget/packages/grpc.tools/2.49.0/build/native/include/google/protobuf/timestamp.proto\
+ Protos/Forecast.proto

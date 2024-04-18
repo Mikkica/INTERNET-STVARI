@@ -1,0 +1,181 @@
+openapi: 3.0.0
+info:
+  title: Forecast API
+  version: 1.0.0
+  description: API for managing forecast data
+paths:
+  /getForecast/{id}:
+    get:
+      summary: Get forecast value by ID
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID of the forecast value to retrieve
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ForecastValue"
+        "404":
+          description: Forecast with the specified ID not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValueMessage"
+        "500":
+          description: Internal server error
+  /addForecast:
+    post:
+      summary: Add forecast value
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ForecastValue"
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValueMessage"
+        "500":
+          description: Internal server error
+  /deleteForecast/{id}:
+    delete:
+      summary: Delete forecast by ID
+      description: Deletes forecast data with the specified ID.
+      parameters:
+        - in: path
+          name: id
+          description: ID of the forecast to delete
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValueMessage'
+        '404':
+          description: Forecast with the specified ID not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValueMessage'
+        '500':
+          description: Internal Server Error
+  /updateForecast:
+    put:
+      summary: Update forecast value by ID
+      description: Update forecast data with the specified ID.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateForecastRequest'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValueMessage'
+        '404':
+          description: Forecast with the specified ID not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValueMessage'
+        '500':
+          description: Internal Server Error
+  /aggregateForecast:
+    get:
+      summary: Perform forecast aggregation
+      parameters:
+        - in: query
+          name: StartTimestamp
+          schema:
+            type: string
+          required: true
+          description: Start timestamp for aggregation
+        - in: query
+          name: EndTimestamp
+          schema:
+            type: string
+          required: true
+          description: End timestamp for aggregation
+        - in: query
+          name: Operation
+          schema:
+            type: string
+          required: true
+          description: Aggregation operation (min, max, avg, sum)
+        - in: query
+          name: FieldName
+          schema:
+            type: string
+          required: true
+          description: Name of the field to aggregate
+
+
+components:
+  schemas:
+    ForecastValue:
+      type: object
+      properties:
+        UTC:
+          type: string
+        AmbRH:
+          type: number
+        AmbTemp:
+          type: number
+        WindSpeed:
+          type: number
+        O3PPB:
+          type: number
+        PDRConc:
+          type: number
+        WindDirection:
+          type: number
+    ValueMessage:
+      type: object
+      properties:
+        id:
+          type: string
+        message:
+          type: string
+    UpdateForecastRequest:
+      type: object
+      properties:
+        id:
+          type: string
+        UTC:
+          type: string
+        AmbRH:
+          type: number
+        AmbTemp:
+          type: number
+        WindSpeed:
+          type: number
+        O3PPB:
+          type: number
+        PDRConc:
+          type: number
+        WindDirection:
+          type: number
+    AggregationValue:
+      type: object
+      properties:
+        Result:
+          type: number
+          

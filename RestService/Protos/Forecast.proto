@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+package forecast;
+
+import "google/protobuf/timestamp.proto";
+
+service ForecastS {
+   rpc GetForecastValueById(ForecastId) returns (ValueMessage);
+   rpc AddForecastValue(ForecastValue) returns (ValueMessage);
+   rpc DeleteForecastById(ForecastId) returns (ValueMessage);
+   rpc UpdateForecastById(ForecastValue) returns (ValueMessage);
+   rpc ForecastAggregation(ForecastAggregationRequest) returns (AggregationValue);
+}
+
+message ForecastId {
+	string _id = 1;
+}
+
+message ForecastValue {
+    string _id = 1;
+    string UTC = 2;
+    double Amb_RH = 3;
+    double Amb_Temp = 4;
+    double WindSpeed = 5;
+    double O3_PPB = 6;
+    double PDR_Conc = 7;
+    double WindDirection = 8;
+ 
+}
+
+message ValueMessage {
+	string id = 1;
+	string message = 2;
+	ForecastValue forecastvalue = 3;
+}
+
+message ForecastAggregationRequest {
+  string start_timestamp = 1;
+  string end_timestamp = 2;
+  string operation = 3;
+  string field_name = 4;
+}
+
+message AggregationValue{
+    double result = 1;
+}
