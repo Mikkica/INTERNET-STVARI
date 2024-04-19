@@ -24,6 +24,7 @@ public class ForecastService : ForecastS.ForecastSBase
 
         Console.WriteLine(Id);
 
+
         ObjectId objectId;
         try
         {
@@ -170,98 +171,51 @@ public class ForecastService : ForecastS.ForecastSBase
 
  public override async Task<AggregationValue> ForecastAggregation(ForecastAggregationRequest request, ServerCallContext context)
 {
-    try
+
+    string startTimestamp = request.StartTimestamp;
+    string endTimestamp = request.EndTimestamp;
+
+    var filter = Builders<ForecastModel>.Filter.And(
+        Builders<ForecastModel>.Filter.Gte(x => x.UTC, startTimestamp),
+        Builders<ForecastModel>.Filter.Lte(x => x.UTC, endTimestamp)
+    );
+    
+
+    var values = await _collection.Find(filter).ToListAsync();
+
+
+    double result;
+    if (values.Count > 0)
     {
-        // Definišite format datuma i vremena koji očekujete (npr. "yyyy-MM-ddTHH:mm:ssZ")
-        string format = "yyyy-MM-ddTHH:mm:ssZ";
 
-        // Parsirajte `StartTimestamp` i `EndTimestamp` koristeći `DateTime.TryParseExact`
-        if (!DateTime.TryParseExact(request.StartTimestamp, format, null, System.Globalization.DateTimeStyles.AssumeUniversal, out DateTime startTimestamp))
-        {
-            throw new RpcException(new Status(StatusCode.InvalidArgument, "Invalid StartTimestamp format"));
-        }
-
-        if (!DateTime.TryParseExact(request.EndTimestamp, format, null, System.Globalization.DateTimeStyles.AssumeUniversal, out DateTime endTimestamp))
-        {
-            throw new RpcException(new Status(StatusCode.InvalidArgument, "Invalid EndTimestamp format"));
-        }
-
-        // Kreiranje filtera i projekcije
-        var filter = Builders<ForecastModel>.Filter.And(
-            Builders<ForecastModel>.Filter.Gte("UTC", startTimestamp),
-            Builders<ForecastModel>.Filter.Lte("UTC", endTimestamp)
-        );
-
-        var projection = Builders<ForecastModel>.Projection.Include(request.FieldName);
-
-        // Nabavite rezultate
-        var values = await _collection.Find(filter)
-                                      .Project(projection)
-                                      .ToListAsync();
-
-        // Sakupljanje i obrada vrednosti
-        var fieldValues = new List<double>();
-        foreach (var document in values)
-        {
-            if (document.TryGetValue(request.FieldName, out BsonValue fieldValue))
-            {
-                if (fieldValue.IsNumeric)
-                {
-                    fieldValues.Add(fieldValue.AsDouble);
-                }
-            }
-        }
-
-        // Računanje tražene agregacije
-        double result = 0;
         switch (request.Operation.ToLower())
         {
             case "min":
-                if (fieldValues.Any())
-                {
-                    result = fieldValues.Min();
-                }
-                else
-                {
-                    throw new RpcException(new Status(StatusCode.InvalidArgument, "No values found for minimum operation"));
-                }
+                result = values.Min(v => Convert.ToDouble(v.GetType().GetProperty(request.FieldName)?.GetValue(v)));
                 break;
             case "max":
-                if (fieldValues.Any())
-                {
-                    result = fieldValues.Max();
-                }
-                else
-                {
-                    throw new RpcException(new Status(StatusCode.InvalidArgument, "No values found for maximum operation"));
-                }
+                result = values.Max(v => Convert.ToDouble(v.GetType().GetProperty(request.FieldName)?.GetValue(v)));
                 break;
             case "avg":
-                if (fieldValues.Any())
-                {
-                    result = fieldValues.Average();
-                }
-                else
-                {
-                    throw new RpcException(new Status(StatusCode.InvalidArgument, "No values found for average operation"));
-                }
+                result = values.Average(v => Convert.ToDouble(v.GetType().GetProperty(request.FieldName)?.GetValue(v)));
                 break;
             case "sum":
-                result = fieldValues.Sum();
+                result = values.Sum(v => Convert.ToDouble(v.GetType().GetProperty(request.FieldName)?.GetValue(v)));
                 break;
             default:
                 throw new RpcException(new Status(StatusCode.InvalidArgument, "Invalid aggregation operation type"));
         }
-
-        return new AggregationValue
-        {
-            Result = result
-        };
     }
-    catch (Exception ex)
+    else
     {
-        throw new RpcException(new Status(StatusCode.Internal, $"Error performing aggregation: {ex.Message}"));
+        throw new RpcException(new Status(StatusCode.NotFound, "No data found in the specified time range"));
     }
+
+
+    return new AggregationValue
+    {
+        Result = result
+    };
 }
 
 

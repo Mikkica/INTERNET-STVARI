@@ -127,7 +127,9 @@ app.get('/aggregateForecast', (req, res) => {
         FieldName: fieldName
     };
  
-    console.log(request);
+    console.log(1);
+    console.log(request.FieldName);
+    console.log(2);
  
     client.ForecastAggregation(request, (error, response) => {
         if (error) {
