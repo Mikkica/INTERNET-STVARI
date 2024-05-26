@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "1pS+YsT3aEuMElFyUxjiABxiACEmf03FV6v+x+/tyJA=",
+  "Source": "EventInfoMicroservice",
+  "BasePath": "_content/EventInfoMicroservice",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

@@ -1,19 +1,21 @@
 version: '3.8'
 
 services:
-  dotnet:
-    image: dotnet-image3
-    ports:
-      - "5087:5087"
+  
    
 
   mongo:
-    image: mongo:latest
+    image: mongo
     ports:
-      - "27017:27017"
+      - "27018:27018"
     
 
   javascript:
     image: js-image:js2
     ports:
       - "3000:3000"
+
+  dotnet:
+    image: dotnet-image4
+    ports:
+      - "5087:5087"

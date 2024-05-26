@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  mqtt-broker:
+    build: ./mqtt-broker
+    container_name: mqtt-broker
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    volumes:
+      - ./mqtt-broker/mosquitto.conf:/mosquitto/config/mosquitto.conf
+
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+  eventinfo-service:
+    build: ./EventInfoMicroservice
+    container_name: eventinfo-service
+    ports:
+      - "5252:5252"
+    depends_on:
+      - mqtt-broker
+
+
+  analytics:
+    build: ./Analytics
+    container_name: Analytics
+    depends_on:
+      - mqtt-broker
+
+  iotmqtt:
+    build: ./IoTMqtt
+    container_name: iotmqtt
+    depends_on:
+      - mqtt-broker
+      - mongodb
+
+
+
+
+
+volumes:
+  mongo-data:
