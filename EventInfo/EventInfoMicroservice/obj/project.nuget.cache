@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "UGR4RbOR0I8byaqK/Pny8gZc3dJ/N9b3FFWBVTxKqiUHL+xuxEgx1xogqnwe7inp+p0FZULeMQ+YFh5znvB5Kw==",
+  "dgSpecHash": "ckJk48HB1zYtifHva88VYOY1g/nZrmd4xxQ8U32GPZRd2cdSlZwHHIL3Bv/P9eCbFftxsHvncxHmTlwsxhM9Jw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\mihaj\\OneDrive\\Radna površina\\EventInfo\\EventInfoMicroservice\\EventInfoMicroservice.csproj",
+  "projectFilePath": "C:\\Users\\mihaj\\OneDrive\\Radna površina\\INTERNET STVARI\\EventInfo\\EventInfoMicroservice\\EventInfoMicroservice.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mihaj\\.nuget\\packages\\awssdk.core\\3.7.100.14\\awssdk.core.3.7.100.14.nupkg.sha512",
     "C:\\Users\\mihaj\\.nuget\\packages\\awssdk.securitytoken\\3.7.100.14\\awssdk.securitytoken.3.7.100.14.nupkg.sha512",

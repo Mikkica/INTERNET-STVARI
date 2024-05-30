@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\mihaj\\OneDrive\\Radna površina\\EventInfo\\EventInfoMicroservice\\EventInfoMicroservice.csproj": {}
+    "C:\\Users\\mihaj\\OneDrive\\Radna površina\\INTERNET STVARI\\EventInfo\\EventInfoMicroservice\\EventInfoMicroservice.csproj": {}
   },
   "projects": {
-    "C:\\Users\\mihaj\\OneDrive\\Radna površina\\EventInfo\\EventInfoMicroservice\\EventInfoMicroservice.csproj": {
+    "C:\\Users\\mihaj\\OneDrive\\Radna površina\\INTERNET STVARI\\EventInfo\\EventInfoMicroservice\\EventInfoMicroservice.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mihaj\\OneDrive\\Radna površina\\EventInfo\\EventInfoMicroservice\\EventInfoMicroservice.csproj",
+        "projectUniqueName": "C:\\Users\\mihaj\\OneDrive\\Radna površina\\INTERNET STVARI\\EventInfo\\EventInfoMicroservice\\EventInfoMicroservice.csproj",
         "projectName": "EventInfoMicroservice",
-        "projectPath": "C:\\Users\\mihaj\\OneDrive\\Radna površina\\EventInfo\\EventInfoMicroservice\\EventInfoMicroservice.csproj",
+        "projectPath": "C:\\Users\\mihaj\\OneDrive\\Radna površina\\INTERNET STVARI\\EventInfo\\EventInfoMicroservice\\EventInfoMicroservice.csproj",
         "packagesPath": "C:\\Users\\mihaj\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mihaj\\OneDrive\\Radna površina\\EventInfo\\EventInfoMicroservice\\obj\\",
+        "outputPath": "C:\\Users\\mihaj\\OneDrive\\Radna površina\\INTERNET STVARI\\EventInfo\\EventInfoMicroservice\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
