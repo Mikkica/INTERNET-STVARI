@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Filter data</title>
+</head>
+
+<body>
+    <div class="container1">
+        <h2>Calculate averages</h2>
+        <label for="start-datetime">Start date</label>
+        <input type="datetime-local" name="start-datetime" id="startDate">
+        <label for="end-datetime">End date</label>
+        <input type="datetime-local" name="end-datetime" id="endDate">
+        <button id="sendBtn" onclick="submitForm()">Submit</button>
+    </div>
+    <script>
+        async function submitForm() {
+            const startDate = document.getElementById('startDate').value;
+            const endDate = document.getElementById('endDate').value;
+
+            const startDateTime = new Date(startDate);
+            const endDateTime = new Date(endDate);
+
+            const url = `/api/documents?startDate=${startDateTime.toISOString()}&endDate=${endDateTime.toISOString()}`;
+          
+            try {
+              const response = await fetch(url, {
+                method: 'GET',
+                headers: {
+                  'Content-Type': 'application/json'
+                }
+              });
+          
+              const data = await response.json();
+              console.log(data);
+            } catch (error) {
+              console.error('Došlo je do greške prilikom slanja zahteva:', error);
+            }
+          }
+          
+    </script>
+</body>
+
+</html>

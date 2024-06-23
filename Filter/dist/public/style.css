@@ -1,0 +1,79 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0; /* Svetlo siva pozadina */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    background-color: #ffffff; /* Bela pozadina kontejnera */
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Senka */
+    padding: 20px;
+    width: 400px;
+    max-width: 90%;
+    text-align: center;
+}
+
+.container h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.form-group input[type="datetime-local"] {
+    height: 40px;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.form-group button {
+    height: 40px;
+    width: 100%;
+    padding: 10px;
+    font-size: 18px;
+    color: #fff;
+    background-color: #22bb33; /* Zelena boja */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.form-group button:hover {
+    background-color: #1a961f; /* Tamnija nijansa zelene */
+}
+
+#averages {
+    margin-top: 20px;
+    text-align: left;
+}
+
+#averages h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+#averages p {
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+

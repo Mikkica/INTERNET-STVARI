@@ -1,0 +1,22 @@
+# ekuiper/config/mqtt_source.yaml
+mqtt:
+  default:
+    server: tcp://localhost:1883
+
+sources:
+  - name: mqtt_source
+    type: mqtt
+    mqtt:
+      topic: sensor_data
+
+sinks:
+  - name: mqtt_sink
+    type: mqtt
+    mqtt:
+      topic: detected_events_topic
+
+rules:
+  - name: example_rule
+    sql: "SELECT * FROM mqtt_source WHERE Amb_Temp > 25"
+    actions:
+      - sink: mqtt_sink
